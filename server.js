@@ -24,9 +24,20 @@ app.use(express.static('website'));
 
 // Setup Server
 const port = 8000;
-const server = app.listen(port, ()=>{console.log(`running on localhost: ${port}`)})
+const server = app.listen(port, ()=>{console.log(`running on localhost: ${port}`)});
 
 // Respond with JS object when a GET request is made to the homepage
 app.get('/all', function (req, res) {
     res.send(projectData);
-  })
+  });
+  
+  //set up post request to project endpoint to store the data from client
+  app.post('/weatherEntry', function (req,res) {
+    newEntry = {
+      date: req.body.date,
+      temp: req.body.temp,
+      feeling: req.body.feeling
+    }
+    projectData.push(newEntry);
+    res.send(console.log("Data recieved!/n" + newEntry));
+  });
