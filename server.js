@@ -33,11 +33,11 @@ app.get('/all', function (req, res) {
   
   //set up post request to project endpoint to store the data from client
   app.post('/weatherEntry', function (req,res) {
-    newEntry = {
-      date: req.body.date,
-      temp: req.body.temp,
-      feeling: req.body.feeling
-    }
-    projectData.push(newEntry);
-    res.send(console.log("Data recieved!/n" + newEntry));
+   
+    let data = req.body;
+    projectData["temp"] = data.temp;
+    projectData["fefeelingel"] = data.feeling;
+    projectData["date"] = data.date;
+    res.send(projectData);
   });
+  

@@ -27,7 +27,7 @@ const getAPIWeather = async (baseURL, zip, apiKey)=>{
 // POST method:
 const postData = async (url = '', data = {})=>{
     // Default options are marked with *
-    const response = await fetch(url, {
+    const res = await fetch(url, {
       method: 'POST', 
       credentials: 'same-origin', 
       headers: {
