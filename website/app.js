@@ -15,7 +15,7 @@ const getAPIWeather = async (baseURL, zip, apiKey)=>{
     try {
   
       const data = await res.json();
-      console.log(data);
+     // console.log(data);
 
       return data;
     }  catch(error) {
@@ -35,7 +35,7 @@ const getAPIWeather = async (baseURL, zip, apiKey)=>{
 
     try {
         const data = await res.json();
-        console.log(data);
+        //console.log(data);
         return data;
       }  catch(error) {
         console.log("error", error);
@@ -57,7 +57,7 @@ const postData = async (url = '', data = {})=>{
 
     try {
         const newData = await res.json();
-        console.log(newData);
+       // console.log(newData);
         return newData;
       }  catch(error) {
         console.log("error", error);
@@ -69,7 +69,6 @@ const postData = async (url = '', data = {})=>{
 
     let projectData = getProjectData('/weatherEntry')
     .then (function(projectData){
-    console.log("Latest Entry: " + projectData.temp);
 
     //update entryholder divs
     //date
