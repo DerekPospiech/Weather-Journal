@@ -27,7 +27,7 @@ const port = 8000;
 const server = app.listen(port, ()=>{console.log(`running on localhost: ${port}`)});
 
 // Respond with JS object when a GET request is made to the homepage
-app.get('/all', function (req, res) {
+app.get('/weatherEntry', function (req, res) {
     res.send(projectData);
   });
   

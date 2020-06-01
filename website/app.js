@@ -8,7 +8,7 @@ let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 const baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
 const apiKey = '&appid=90ba839ea88d03d4d7bc51af66bd3436&units=imperial'; //added units=imperial at the end to get Fahrenheit per api instructions
 
-//Get method
+//Get method to api
 const getAPIWeather = async (baseURL, zip, apiKey)=>{
 
     const res = await fetch(baseURL+zip+apiKey)
@@ -22,6 +22,25 @@ const getAPIWeather = async (baseURL, zip, apiKey)=>{
       console.log("error", error);
       // appropriately handle the error
     }
+  }
+
+  //GET method from projectdata
+  const getProjectData = async (url = '', data = {})=>{
+    // Default options are marked with *
+    const res = await fetch(url, {
+      method: 'GET', 
+      credentials: 'same-origin', 
+      headers: { 'Content-Type': 'application/json'}
+    });
+
+    try {
+        const data = await res.json();
+        console.log(data);
+        return data;
+      }  catch(error) {
+        console.log("error", error);
+        // appropriately handle the error
+      }
   }
 
 // POST method:
@@ -38,31 +57,36 @@ const postData = async (url = '', data = {})=>{
 
     try {
         const newData = await res.json();
-        console.log(data);
-        return data;
+        console.log(newData);
+        return newData;
       }  catch(error) {
         console.log("error", error);
         // appropriately handle the error
       }
   }
 
-  function updateUI(data={}){
+  function updateUI(){
+
+    let projectData = getProjectData('/weatherEntry')
+    .then (function(projectData){
+    console.log("Latest Entry: " + projectData.temp);
 
     //update entryholder divs
     //date
-    document.getElementById('date').innerText = data.date;
+    document.getElementById('date').innerHTML = projectData.date;
 
     //temp
-    document.getElementById('temp').innerText = data.temp;
+    document.getElementById('temp').innerHTML = projectData.temp;
 
     //content
-    document.getElementById('content').innerText = data.feeling;
+    document.getElementById('content').innerHTML = projectData.fefeelingel;
 
     //reset zip and feelings for next entry
     document.getElementById('zip').value = "";
     document.getElementById('feelings').value = "";
 
-  }
+  })
+}
 
 function getWeather() {
 
@@ -88,7 +112,7 @@ return weather;
         //post data to the server
         postData('/weatherEntry', {date: newDate, temp: data.main.temp, feeling: feelings});
 
-        updateUI({date: newDate, temp: data.main.temp, feeling: feelings});
+        updateUI();
 
-      });
+      })
   });
