@@ -27,10 +27,10 @@ Install
 --------
 
 With node.js installed and running change directory to the project folder, then simply type in the command shell:
-
+```
 npm install
-
-This will install all fiels in the package.json as listed above.
+```
+This will install all files in the package.json as listed above.
 
 Contributing
 ------------
